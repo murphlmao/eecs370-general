@@ -1,0 +1,87 @@
+
+
+================================================================================
+Problem 1: Conversion from Binary [12 points]
+================================================================================
+
+Binary: 0010 1101 1111
+
+Decimal: 735
+  Calculation: 2^9 + 2^7 + 2^6 + 2^4 + 2^3 + 2^2 + 2^1 + 2^0
+             = 512 + 128 + 64 + 16 + 8 + 4 + 2 + 1
+             = 735
+
+Hexadecimal: 0x2DF
+  Calculation: Group into 4-bit nibbles: 0010 | 1101 | 1111
+               0010 = 2
+               1101 = D
+               1111 = F [9 points, Autograded]
+               Result: 2DF
+
+Octal (for fun): 1337
+  Calculation: Group into 3-bit groups from right: 001 | 011 | 011 | 111
+               001 = 1
+               011 = 3
+               011 = 3
+               111 = 7
+               Result: 1337
+
+================================================================================
+Problem 2: Masking Bits in a Binary Number
+================================================================================
+
+
+Explanation:
+- (a >> 4) shifts the integer right by 4 bits, moving bits 7-4 to positions 3-0
+- & 0xF masks out everything except the lowest 4 bits (0xF = 0b1111)
+- This extracts bits 7 through 4 as requested
+
+Example verification:
+  a = 0x2020 = 0010 0000 0010 0000 in binary
+  a >> 4    = 0000 0010 0000 0010
+  & 0xF     = 0000 0000 0000 0010 = 0b0010 = 2
+
+================================================================================
+Problem 3: Logic [15 points]
+================================================================================
+
+Part a: Logical vs Bitwise NOT
+
+Given: a = 15 (8-bit unsigned integer, binary: 00001111)
+
+!a (logical NOT) = 0
+  Explanation: The logical NOT operator returns 0 if the operand is non-zero,
+               and 1 if the operand is zero. Since 15 != 0, !15 = 0.
+
+~a (bitwise NOT) = 240
+  Explanation: Bitwise NOT flips every bit.
+               ~00001111 = 11110000 = 240 (as unsigned 8-bit)
+
+--------------------------------------------------------------------------------
+
+Part b: Match logic gates to truth tables
+Gate1 AND -> C
+Gate2 NOR -> A
+Gate3 OR -> B
+Gate4  XOR -> D
+
+
+----
+part c:
+1. (A*!B)+(!A*B)
+2. !(A+B)
+
+--------------------------------------------------------------------------------
+
+Part d: Draw gates for` X = A + (B * !C)
+
+1. Input C goes into a NOT gate, producing !C
+2. Input B and !C go into an AND gate, producing (B * !C)
+3. Input A and the output of step 2 go into an OR gate, producing X = A + (B * !C)
+
+
+    C ----[NOT]---+
+                  |
+    B -----------[AND]---+
+                         |
+    A -------------------[OR]--- X
