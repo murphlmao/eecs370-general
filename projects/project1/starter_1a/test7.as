@@ -1,0 +1,2 @@
+dup     noop
+dup     halt
